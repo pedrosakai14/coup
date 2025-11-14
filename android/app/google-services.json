@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "692741382499",
+    "firebase_url": "https://coup-7ae2e-default-rtdb.firebaseio.com",
+    "project_id": "coup-7ae2e",
+    "storage_bucket": "coup-7ae2e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692741382499:android:b61f2c5caf881b294df356",
+        "android_client_info": {
+          "package_name": "com.example.coup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Z8uO_iQR39bLdUsgE9KuxzbGl04paJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
