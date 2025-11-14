@@ -69,7 +69,7 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
           SizedBox(height: Sizing.s16),
           TextFormField(
             controller: roomCodeController,
-            maxLength: 6,
+            maxLength: 5,
             onTapOutside: (PointerDownEvent event) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
               label: Text('código da sala'),
@@ -82,7 +82,13 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
           CommonElevatedButton(
             onTap: userNameController.text.isNotEmpty && roomCodeController.text.isNotEmpty
                 ? () {
-                    Navigator.of(context).popAndPushNamed(LobbyPage.routeName);
+                    Navigator.of(context).popAndPushNamed(
+                      LobbyPage.routeName,
+                      arguments: {
+                        'userName': userNameController.text,
+                        'roomCode': roomCodeController.text,
+                      },
+                    );
                   }
                 : null,
             text: Strings.btnContinue,

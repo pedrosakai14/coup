@@ -47,7 +47,9 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
           SizedBox(height: Sizing.s8),
           Text(
             _modalSubtitleString,
-            style: textTheme.bodyMedium?.copyWith(),
+            style: textTheme.bodyMedium?.copyWith(
+              color: Colors.black87,
+            ),
             textAlign: TextAlign.start,
           ),
           SizedBox(height: Sizing.s24),
@@ -64,9 +66,14 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
           ),
           SizedBox(height: Sizing.s16),
           CommonElevatedButton(
-            onTap: controller.text.isEmpty
+            onTap: controller.text.isNotEmpty
                 ? () {
-                    Navigator.of(context).popAndPushNamed(LobbyPage.routeName);
+                    Navigator.of(context).popAndPushNamed(
+                      LobbyPage.routeName,
+                      arguments: {
+                        'userName': controller.text,
+                      }
+                    );
                   }
                 : null,
             text: Strings.btnContinue,

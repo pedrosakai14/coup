@@ -58,24 +58,22 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: Sizing.s24, left: Sizing.s24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CommonElevatedButton(
-                  onTap: () => onTap(isCreate: false),
-                  text: Strings.joinRoom,
-                ),
-                SizedBox(height: Sizing.s16),
-                CommonElevatedButton(
-                  onTap: () => onTap(isCreate: true),
-                  text: Strings.createRoom,
-                ),
-                SizedBox(height: Sizing.s24),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CommonElevatedButton(
+                onTap: () => onTap(isCreate: false),
+                text: Strings.joinRoom,
+                horizontalPadding: Sizing.s24,
+              ),
+              CommonElevatedButton(
+                onTap: () => onTap(isCreate: true),
+                text: Strings.createRoom,
+                horizontalPadding: Sizing.s24,
+                verticalPadding: Sizing.s20,
+              ),
+            ],
           ),
         ],
       ),
