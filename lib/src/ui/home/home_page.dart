@@ -1,9 +1,6 @@
 import 'package:coup/src/coup.dart';
 import 'package:flutter/material.dart';
 
-const String _JOIN_ROOM_STRING = 'Entrar em sala';
-const String _CREATE_ROOM_STRING = 'Criar sala';
-
 class HomePage extends StatefulWidget {
   static const String routeName = '/home-page';
 
@@ -67,46 +64,14 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ElevatedButton(
-                  onPressed: () => onTap(isCreate: false),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                      vertical: Sizing.s16,
-                      horizontal: Sizing.s16,
-                    ),
-                    elevation: 0.0,
-                    backgroundColor: Color(0xFF5d2842),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
-                    ),
-                  ),
-                  child: Text(
-                    _JOIN_ROOM_STRING,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
+                CommonElevatedButton(
+                  onTap: () => onTap(isCreate: false),
+                  text: Strings.joinRoom,
                 ),
                 SizedBox(height: Sizing.s16),
-                ElevatedButton(
-                  onPressed: () => onTap(isCreate: true),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                      vertical: Sizing.s16,
-                      horizontal: Sizing.s16,
-                    ),
-                    elevation: 0.0,
-                    backgroundColor: Color(0xFF5d2842),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
-                    ),
-                  ),
-                  child: Text(
-                    _CREATE_ROOM_STRING,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
+                CommonElevatedButton(
+                  onTap: () => onTap(isCreate: true),
+                  text: Strings.createRoom,
                 ),
                 SizedBox(height: Sizing.s24),
               ],

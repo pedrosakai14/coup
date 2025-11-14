@@ -21,6 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'coup',
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+      routes: {
+        HomePage.routeName: (context) => HomePage(),
+        LobbyPage.routeName: (context) => LobbyPage(),
+      },
       home: HomePage(),
     );
   }
