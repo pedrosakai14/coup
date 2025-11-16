@@ -22,70 +22,99 @@ class LobbyPage extends StatefulWidget {
 
 class _LobbyPageState extends State<LobbyPage> {
   late final textTheme = Theme.of(context).textTheme;
-  final LobbyCubit cubit = LobbyCubit();
-
-  @override
-  void initState() {
-    super.initState();
-    cubit.init(userName: widget.userName, roomCode: widget.roomCode);
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LobbyCubit, LobbyState>(
-      bloc: cubit,
-      builder: (context, state) {
-        late Widget body;
-        Widget? bottomNavigationBar;
+    return BlocProvider(
+      create: (context) => LobbyCubit()
+        ..init(
+          userName: widget.userName,
+          roomCode: widget.roomCode,
+        ),
+      child: BlocConsumer<LobbyCubit, LobbyState>(
+        listener: (context, state) {
+          if (state.params.alert == null) return;
 
-        switch (state) {
-          case LobbyLoadedState():
-            bottomNavigationBar = SafeArea(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: Colors.grey, width: 0.5),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Sizing.s24, vertical: Sizing.s20),
-                  child: CommonElevatedButton(
-                    onTap: state.roomData.players.length > 1 ? () {} : null,
-                    text: 'Começar jogo',
-                  ),
+          final alertSnack = state.params.alert!.alertSnack;
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                alertSnack.$1,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            );
-
-            body = LobbyLoadedView(roomData: state.roomData);
-            break;
-          case LobbyLoadingState():
-            body = Center(
-              child: Text(Strings.loading),
-            );
-            break;
-          case LobbyErrorState():
-            body = Center(
-              child: Text('Error'),
-            );
-            break;
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Lobby'),
-            leading: IconButton(
-              onPressed: () {
-                cubit.deleteRoom();
-                Navigator.of(context).pop();
-              },
-              icon: Icon(Icons.arrow_back),
+              backgroundColor: alertSnack.$2,
             ),
-          ),
-          bottomNavigationBar: bottomNavigationBar,
-          body: body,
-        );
-      },
+          );
+
+          if (state.params.alert!.shouldPop) {
+            Navigator.of(context).pop();
+          }
+        },
+        builder: (context, state) {
+          final cubit = context.read<LobbyCubit>();
+
+          late Widget body;
+          Widget? bottomNavigationBar;
+
+          switch (state) {
+            case LobbyLoadedState():
+              final isHost = state.params.playerId == state.params.roomData.hostId;
+              final canTapButton = state.params.roomData.players.length > 1 && isHost;
+
+              bottomNavigationBar = SafeArea(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(color: Colors.grey, width: 0.5),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Sizing.s24, vertical: Sizing.s20),
+                    child: CommonElevatedButton(
+                      onTap: canTapButton ? () {} : null,
+                      text: isHost ? 'Começar jogo' : 'Aguardando host começar',
+                    ),
+                  ),
+                ),
+              );
+
+              body = LobbyLoadedView(
+                roomData: state.params.roomData,
+                playerId: state.params.playerId,
+                onTapKick: cubit.onTapKick,
+              );
+              break;
+            case LobbyLoadingState():
+              body = Center(
+                child: Text(Strings.loading),
+              );
+              break;
+            case LobbyErrorState():
+              body = Center(
+                child: Text('Error'),
+              );
+              break;
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Lobby'),
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
+            ),
+            bottomNavigationBar: bottomNavigationBar,
+            body: body,
+          );
+        },
+      ),
     );
   }
 }

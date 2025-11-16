@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                 horizontalPadding: Sizing.s24,
                 verticalPadding: Sizing.s20,
               ),
+              SizedBox(height: 12.0),
             ],
           ),
         ],

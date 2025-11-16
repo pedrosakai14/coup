@@ -9,6 +9,7 @@ class Sizing {
   static double get s18 => 18.0;
   static double get s20 => 20.0;
   static double get s24 => 24.0;
+  static double get s28 => 28.0;
   static double get s32 => 32.0;
   static double get s40 => 40.0;
 }

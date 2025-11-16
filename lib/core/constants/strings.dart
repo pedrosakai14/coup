@@ -5,4 +5,6 @@ class Strings {
   static String get joinRoom => 'Entrar em sala';
   static String get btnContinue => 'Continuar';
   static String get loading => 'Carregando...';
+  static String get you => 'Você';
+  static String get host => 'Host';
 }
