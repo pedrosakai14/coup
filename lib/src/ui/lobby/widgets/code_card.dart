@@ -4,22 +4,27 @@ import 'package:flutter/services.dart';
 
 class CodeCard extends StatelessWidget {
   final String roomCode;
+  final VoidCallback onTap;
 
   const CodeCard({
     super.key,
     required this.roomCode,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Container(
-      decoration: BoxDecoration(color: Color(0xFFd1dae4), borderRadius: BorderRadius.all(Radius.circular(Sizing.s20))),
+      decoration: BoxDecoration(
+        color: CommonColors.backgroundPrimaryCardColor,
+        borderRadius: CommonConstants.borderRadius20,
+      ),
       padding: EdgeInsets.symmetric(vertical: Sizing.s16),
       child: Column(
         children: [
           Text(
-            'Código da Sala',
+            Strings.roomCode,
             style: textTheme.titleSmall?.copyWith(
               color: CommonColors.primaryColor,
             ),
@@ -36,27 +41,13 @@ class CodeCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Sizing.s16),
             child: ElevatedButton(
-              onPressed: () async {
-                await Clipboard.setData(ClipboardData(text: roomCode));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Código copiado com sucesso',
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    backgroundColor: CommonColors.secondaryColor,
-                  ),
-                );
-              },
+              onPressed: onTap,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 overlayColor: CommonColors.secondaryColor,
                 side: BorderSide(
                   color: CommonColors.primaryColor,
-                  width: 1.0,
+                  width: Sizing.s1,
                 ),
               ),
               child: Row(
@@ -68,7 +59,7 @@ class CodeCard extends StatelessWidget {
                   ),
                   SizedBox(width: Sizing.s8),
                   Text(
-                    'Copiar código',
+                    Strings.codeCardCopyCodeBtn,
                     style: textTheme.bodyMedium?.copyWith(
                       color: CommonColors.primaryColor,
                       fontWeight: FontWeight.w500,

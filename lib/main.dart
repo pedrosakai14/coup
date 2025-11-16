@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'coup',
       theme: getThemeData(context),
-      onGenerateRoute: onGenerateRoute,
+      onGenerateRoute: AppRouter.onGenerateRoute,
       home: HomePage(),
     );
   }
@@ -47,24 +47,5 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
-    switch (settings.name) {
-      case HomePage.routeName:
-        return MaterialPageRoute(builder: (context) => HomePage());
-      case LobbyPage.routeName:
-        final routeArgs = args as Map<String, dynamic>? ?? {};
-        return MaterialPageRoute(
-          builder: (context) => LobbyPage(
-            userName: routeArgs['userName'] as String,
-            roomCode: routeArgs['roomCode'] as String?,
-          ),
-        );
-    }
-
-    return null;
   }
 }

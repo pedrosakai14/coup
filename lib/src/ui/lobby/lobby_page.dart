@@ -26,7 +26,7 @@ class _LobbyPageState extends State<LobbyPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LobbyCubit()
+      create: (context) => LobbyCubit(roomRepository: RoomRepositoryImpl())
         ..init(
           userName: widget.userName,
           roomCode: widget.roomCode,
@@ -50,13 +50,10 @@ class _LobbyPageState extends State<LobbyPage> {
             ),
           );
 
-          if (state.params.alert!.shouldPop) {
-            Navigator.of(context).pop();
-          }
+          context.read<LobbyCubit>().clearAlert();
+          if (state.params.alert!.shouldPop) Navigator.of(context).pop();
         },
         builder: (context, state) {
-          final cubit = context.read<LobbyCubit>();
-
           late Widget body;
           Widget? bottomNavigationBar;
 
@@ -69,14 +66,17 @@ class _LobbyPageState extends State<LobbyPage> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(color: Colors.grey, width: 0.5),
+                      top: BorderSide(
+                        color: CommonColors.grey,
+                        width: CommonConstants.BORDER_WIDTH_BOTTOMBAR,
+                      ),
                     ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: Sizing.s24, vertical: Sizing.s20),
                     child: CommonElevatedButton(
                       onTap: canTapButton ? () {} : null,
-                      text: isHost ? 'Começar jogo' : 'Aguardando host começar',
+                      text: isHost ? Strings.lobbyPageBtnTextHost : Strings.lobbyPageBtnTextNonHost,
                     ),
                   ),
                 ),
@@ -85,7 +85,6 @@ class _LobbyPageState extends State<LobbyPage> {
               body = LobbyLoadedView(
                 roomData: state.params.roomData,
                 playerId: state.params.playerId,
-                onTapKick: cubit.onTapKick,
               );
               break;
             case LobbyLoadingState():
@@ -95,18 +94,16 @@ class _LobbyPageState extends State<LobbyPage> {
               break;
             case LobbyErrorState():
               body = Center(
-                child: Text('Error'),
+                child: Text(Strings.genericError),
               );
               break;
           }
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Lobby'),
+              title: Text(Strings.lobbyPageAppbarTitle),
               leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(Icons.arrow_back),
               ),
             ),

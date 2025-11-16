@@ -28,9 +28,9 @@ class CommonElevatedButton extends StatelessWidget {
           ),
           elevation: 0.0,
           backgroundColor: CommonColors.backgroundPrimaryColor,
-          disabledBackgroundColor: Color(0xFFadadad),
+          disabledBackgroundColor: CommonColors.backgroundDisabledColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
+            borderRadius: CommonConstants.borderRadius8,
           ),
         ),
         child: Text(

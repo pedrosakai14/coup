@@ -5,7 +5,11 @@ class LobbyParams {
   final Room roomData;
   final LobbyAlerts? alert;
 
-  const LobbyParams({required this.playerId, required this.roomData, this.alert});
+  const LobbyParams({
+    required this.playerId,
+    required this.roomData,
+    this.alert,
+  });
 
   LobbyParams copyWith({
     String? playerId,

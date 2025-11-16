@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
+      isScrollControlled: true,
       builder: (context) {
         return SafeArea(
           child: ClipRRect(
@@ -22,7 +23,12 @@ class _HomePageState extends State<HomePage> {
               topLeft: Radius.circular(Sizing.s8),
               topRight: Radius.circular(Sizing.s8),
             ),
-            child: isCreate ? CreateRoomModal() : JoinRoomModal(),
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: isCreate ? CreateRoomModal() : JoinRoomModal(),
+            ),
           ),
         );
       },
@@ -32,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -42,14 +49,14 @@ class _HomePageState extends State<HomePage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: SizedBox(
-              height: 300.0,
+              height: Sizing.s300,
               width: MediaQuery.sizeOf(context).width,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color(0xFF151515).withValues(alpha: 0.0),
-                      Color(0xFF151515),
+                      CommonColors.black.withValues(alpha: 0.0),
+                      CommonColors.black,
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -73,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                 horizontalPadding: Sizing.s24,
                 verticalPadding: Sizing.s20,
               ),
-              SizedBox(height: 12.0),
+              SizedBox(height: Sizing.s12),
             ],
           ),
         ],

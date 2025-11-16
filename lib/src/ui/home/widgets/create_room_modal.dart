@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:coup/src/coup.dart';
 
-const String _modalSubtitleString = 'Digite seu nome para criar uma nova sala';
-const String _userNameString = 'nome de usuário';
-
 class CreateRoomModal extends StatefulWidget {
   const CreateRoomModal({super.key});
 
@@ -33,7 +30,7 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(Sizing.s24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -41,26 +38,26 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
         children: [
           Text(
             Strings.createRoom,
-            style: textTheme.titleMedium?.copyWith(),
             textAlign: TextAlign.start,
+            style: textTheme.titleMedium?.copyWith(),
           ),
           SizedBox(height: Sizing.s8),
           Text(
-            _modalSubtitleString,
-            style: textTheme.bodyMedium?.copyWith(
-              color: Colors.black87,
-            ),
+            Strings.createRoomModalSubtitle,
             textAlign: TextAlign.start,
+            style: textTheme.bodyMedium?.copyWith(
+              color: CommonColors.tertiaryColor,
+            ),
           ),
           SizedBox(height: Sizing.s24),
           TextFormField(
             controller: controller,
-            maxLength: 30,
+            maxLength: CommonConstants.NAME_MAX_LENGTH,
             onTapOutside: (PointerDownEvent event) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
-              label: Text(_userNameString),
+              label: Text(Strings.username),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
+                borderRadius: CommonConstants.borderRadius8,
               ),
             ),
           ),
@@ -70,9 +67,9 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
                 ? () {
                     Navigator.of(context).popAndPushNamed(
                       LobbyPage.routeName,
-                      arguments: {
-                        'userName': controller.text,
-                      }
+                      arguments: LobbyPageArgs(
+                        userName: controller.text,
+                      ),
                     );
                   }
                 : null,

@@ -6,36 +6,23 @@ enum LobbyAlerts {
   playerRemovedFails,
   roomCrowded,
   genericError,
-  youWereKicked;
+  youWereKicked,
+  codeCopiedSuccess;
 
   (String, Color) get alertSnack {
     return switch (this) {
-      LobbyAlerts.playerRemovedSuccess => (
-        'Jogador removido com sucesso',
-        CommonColors.secondaryColor,
-      ),
-      LobbyAlerts.playerRemovedFails => (
-        'Ocorreu um problema ao remover o jogador',
-        CommonColors.errorColor,
-      ),
-      LobbyAlerts.roomCrowded => (
-        'A sala em questão já está lotada :(',
-        CommonColors.errorColor,
-      ),
-      LobbyAlerts.genericError => (
-        'Ocorreu algum erro, tente novamente',
-        CommonColors.errorColor,
-      ),
-      LobbyAlerts.youWereKicked => (
-        'Você foi expulso da sala',
-        CommonColors.errorColor,
-      ),
+      LobbyAlerts.playerRemovedSuccess => (Strings.lobbyAlertsPlayerRemovedSuccess, CommonColors.secondaryColor),
+      LobbyAlerts.playerRemovedFails => (Strings.lobbyAlertsPlayerRemovedFails, CommonColors.errorColor),
+      LobbyAlerts.roomCrowded => (Strings.lobbyAlertsRoomCrowded, CommonColors.errorColor),
+      LobbyAlerts.genericError => (Strings.genericError, CommonColors.errorColor),
+      LobbyAlerts.youWereKicked => (Strings.lobbyAlertsYouWereKicked, CommonColors.errorColor),
+      LobbyAlerts.codeCopiedSuccess => (Strings.codeCardCopyCodeSuccess, CommonColors.secondaryColor),
     };
   }
 
   bool get shouldPop {
     return switch (this) {
-      LobbyAlerts.playerRemovedSuccess || LobbyAlerts.playerRemovedFails => false,
+      LobbyAlerts.playerRemovedSuccess || LobbyAlerts.playerRemovedFails || LobbyAlerts.codeCopiedSuccess => false,
       LobbyAlerts.roomCrowded || LobbyAlerts.genericError || LobbyAlerts.youWereKicked => true,
     };
   }

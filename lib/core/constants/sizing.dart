@@ -1,6 +1,7 @@
 class Sizing {
   const Sizing._();
 
+  static double get s1 => 1.0;
   static double get s2 => 2.0;
   static double get s4 => 4.0;
   static double get s8 => 8.0;
@@ -12,4 +13,5 @@ class Sizing {
   static double get s28 => 28.0;
   static double get s32 => 32.0;
   static double get s40 => 40.0;
+  static double get s300 => 300.0;
 }

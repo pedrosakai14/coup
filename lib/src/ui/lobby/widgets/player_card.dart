@@ -22,8 +22,8 @@ class PlayerCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(Sizing.s16),
       decoration: BoxDecoration(
-        color: Color(0xFFEEEEEE),
-        borderRadius: BorderRadius.all(Radius.circular(Sizing.s16)),
+        color: CommonColors.backgroundSecondaryCardColor,
+        borderRadius: CommonConstants.borderRadius16,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class PlayerCard extends StatelessWidget {
                     : Text(
                         player.name.characters.first.toUpperCase(),
                         style: textTheme.bodyLarge?.copyWith(
-                          color: Colors.white,
+                          color: CommonColors.white,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -52,9 +52,7 @@ class PlayerCard extends StatelessWidget {
               SizedBox(width: Sizing.s12),
               Text(
                 player.name,
-                style: textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
               ),
               SizedBox(width: Sizing.s8),
               if (isCurrentPlayer)
@@ -62,7 +60,7 @@ class PlayerCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: Sizing.s8, vertical: Sizing.s4),
                   decoration: BoxDecoration(
                     color: CommonColors.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(Sizing.s16)),
+                    borderRadius: CommonConstants.borderRadius16,
                   ),
                   child: Text(
                     Strings.you,
@@ -75,7 +73,7 @@ class PlayerCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: Sizing.s8, vertical: Sizing.s4),
                   decoration: BoxDecoration(
                     color: CommonColors.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(Sizing.s16)),
+                    borderRadius: CommonConstants.borderRadius16,
                   ),
                   child: Text(
                     Strings.host,

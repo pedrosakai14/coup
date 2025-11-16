@@ -37,7 +37,7 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(Sizing.s24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -50,19 +50,19 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
           ),
           SizedBox(height: Sizing.s8),
           Text(
-            'Digite seu nome para criar uma nova sala',
+            Strings.joinRoomModalSubtitle,
             style: textTheme.bodyMedium?.copyWith(),
             textAlign: TextAlign.start,
           ),
           SizedBox(height: Sizing.s24),
           TextFormField(
             controller: userNameController,
-            maxLength: 30,
+            maxLength: CommonConstants.NAME_MAX_LENGTH,
             onTapOutside: (PointerDownEvent event) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
-              label: Text('nome de usuário'),
+              label: Text(Strings.username),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
+                borderRadius: CommonConstants.borderRadius8,
               ),
             ),
           ),
@@ -72,9 +72,9 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
             maxLength: 5,
             onTapOutside: (PointerDownEvent event) => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
-              label: Text('código da sala'),
+              label: Text(Strings.roomCode),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(Sizing.s8)),
+                borderRadius: CommonConstants.borderRadius8,
               ),
             ),
           ),
@@ -84,10 +84,10 @@ class _JoinRoomModalState extends State<JoinRoomModal> {
                 ? () {
                     Navigator.of(context).popAndPushNamed(
                       LobbyPage.routeName,
-                      arguments: {
-                        'userName': userNameController.text,
-                        'roomCode': roomCodeController.text,
-                      },
+                      arguments: LobbyPageArgs(
+                        userName: userNameController.text,
+                        roomCode: roomCodeController.text,
+                      ),
                     );
                   }
                 : null,
