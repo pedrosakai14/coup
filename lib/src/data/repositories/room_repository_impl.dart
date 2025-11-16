@@ -44,14 +44,10 @@ class RoomRepositoryImpl implements RoomRepository {
     final roomRef = _database.ref('rooms/$roomCode');
 
     final TransactionResult result = await roomRef.runTransaction((Object? data) {
-      if (data == null) {
-        throw RoomNotFoundException();
-      }
+      if (data == null) return Transaction.success(data);
 
       final currentRoom = Room.fromMap(data as Map<dynamic, dynamic>);
-      if (currentRoom.players.length == CommonConstants.MAX_PLAYERS) {
-        throw RoomIsFullException();
-      }
+      if (currentRoom.players.length == CommonConstants.MAX_PLAYERS) throw RoomIsFullException();
 
       String finalUserName = userName;
       final allNames = currentRoom.players.map((e) => e.name).toSet();
@@ -65,7 +61,7 @@ class RoomRepositoryImpl implements RoomRepository {
           }
           i++;
           if (i > CommonConstants.MAX_PLAYERS) {
-            throw JoinRoomFailedException('invalid username.');
+            throw JoinRoomFailedException('invalid username');
           }
         }
       }
