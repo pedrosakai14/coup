@@ -55,31 +55,9 @@ class PlayerCard extends StatelessWidget {
                 style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
               ),
               SizedBox(width: Sizing.s8),
-              if (isCurrentPlayer)
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: Sizing.s8, vertical: Sizing.s4),
-                  decoration: BoxDecoration(
-                    color: CommonColors.secondaryColor,
-                    borderRadius: CommonConstants.borderRadius16,
-                  ),
-                  child: Text(
-                    Strings.you,
-                    style: textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
-                  ),
-                ),
+              if (isCurrentPlayer) CommonChip(text: Strings.you),
               SizedBox(width: Sizing.s8),
-              if (player.isHost)
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: Sizing.s8, vertical: Sizing.s4),
-                  decoration: BoxDecoration(
-                    color: CommonColors.secondaryColor,
-                    borderRadius: CommonConstants.borderRadius16,
-                  ),
-                  child: Text(
-                    Strings.host,
-                    style: textTheme.bodySmall?.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
-                  ),
-                ),
+              if (player.isHost) CommonChip(text: Strings.host),
             ],
           ),
           if (!player.isHost && !isCurrentPlayer && isCurrentPlayerHost)

@@ -65,12 +65,13 @@ class _CreateRoomModalState extends State<CreateRoomModal> {
           CommonElevatedButton(
             onTap: controller.text.isNotEmpty
                 ? () {
-                    Navigator.of(context).popAndPushNamed(
-                      LobbyPage.routeName,
-                      arguments: LobbyPageArgs(
-                        userName: controller.text,
-                      ),
-                    );
+                    Navigator.of(context).popAndPushNamed(GamePage.routeName);
+                    // Navigator.of(context).popAndPushNamed(
+                    //   LobbyPage.routeName,
+                    //   arguments: LobbyPageArgs(
+                    //     userName: controller.text,
+                    //   ),
+                    // );
                   }
                 : null,
             text: Strings.btnContinue,

@@ -17,6 +17,9 @@ class AppRouter {
             roomCode: routeArgs.roomCode,
           ),
         );
+
+      case GamePage.routeName:
+        return MaterialPageRoute(builder: (context) => const GamePage());
     }
 
     return null;

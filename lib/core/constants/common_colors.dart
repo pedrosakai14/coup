@@ -10,6 +10,7 @@ class CommonColors {
   static Color get errorColor => Color(0xFFc42c2c);
 
   static Color get backgroundPrimaryColor => Color(0xFF5d2842);
+  static Color get backgroundSecondaryDarkColor => Color(0xFF0d4230);
   static Color get backgroundDisabledColor => Color(0xFFadadad);
   static Color get backgroundPrimaryCardColor => Color(0xFFd1dae4);
   static Color get backgroundSecondaryCardColor => Color(0xFFEEEEEE);

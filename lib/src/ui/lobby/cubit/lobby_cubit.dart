@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:math' hide log;
 
 import 'package:coup/src/coup.dart';
 import 'package:coup/src/ui/lobby/enums/lobby_alerts.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
 part 'lobby_state.dart';
 
